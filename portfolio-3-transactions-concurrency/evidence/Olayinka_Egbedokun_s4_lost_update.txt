@@ -1,0 +1,38 @@
+Lines are grouped by session; the waits shown, and the start times below, give the order of events.
+
+=== 4a. READ COMMITTED, plain read then write (WU/2023/0002, draft score at start: 50.00)
+-- t=0 s, lecturer (adds 5, waits 2 s between read and write):
+   lecturer: read score 50.00 after waiting 0.0 s
+   lecturer: wrote score 55.00
+-- t=1 s, head (adds 3):
+   head: read score 50.00 after waiting 0.0 s
+   head: wrote score 53.00
+Final score: 55.00 (both changes applied would give 58.00)
+
+=== 4b. READ COMMITTED, row locked when read (SELECT ... FOR UPDATE) (WU/2023/0004, draft score at start: 50.00)
+-- t=0 s, lecturer (adds 5, waits 2 s between read and write):
+   lecturer: read score 50.00 after waiting 0.0 s
+   lecturer: wrote score 55.00
+-- t=1 s, head (adds 3):
+   head: read score 55.00 after waiting 1.0 s
+   head: wrote score 58.00
+Final score: 58.00 (both changes applied would give 58.00)
+
+=== 4c. REPEATABLE READ, plain read then write, retried on serialization error (WU/2023/0006, draft score at start: 50.00)
+-- t=0 s, lecturer (adds 5, waits 2 s between read and write):
+   lecturer: read score 50.00 after waiting 0.0 s
+   ERROR:  could not serialize access due to concurrent update
+   lecturer: transaction failed with a serialization error; retrying
+   lecturer: read score 53.00 after waiting 0.0 s
+   lecturer: wrote score 58.00
+-- t=1 s, head (adds 3):
+   head: read score 50.00 after waiting 0.0 s
+   head: wrote score 53.00
+Final score: 58.00 (both changes applied would give 58.00)
+
+=== 4d. READ COMMITTED, the database does the arithmetic: UPDATE ... SET score = score + n (WU/2023/0003, draft score at start: 50.00)
+-- t=0 s, lecturer (adds 5, keeps the transaction open 2 s):
+   lecturer: score is now 55.00 after waiting 0.0 s
+-- t=1 s, head (adds 3):
+   head: score is now 58.00 after waiting 0.9 s
+Final score: 58.00 (both changes applied would give 58.00)

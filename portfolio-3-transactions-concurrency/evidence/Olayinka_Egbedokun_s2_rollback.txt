@@ -1,0 +1,52 @@
+--- 2a. Yusuf registers for CSC211 and CSC213, then the transaction is rolled back
+BEGIN;
+BEGIN
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0006' AND c.code IN ('CSC211', 'CSC213');
+INSERT 0 2
+ROLLBACK;
+ROLLBACK
+--- 2b. Kelechi registers for five courses in one transaction; the fifth (CSC219) breaks the 24-unit limit
+BEGIN;
+BEGIN
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0004' AND c.code = 'CSC211';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0004' AND c.code = 'CSC213';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0004' AND c.code = 'CSC215';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0004' AND c.code = 'CSC217';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0004' AND c.code = 'CSC219';
+ERROR:  unit limit: 24 registered + 3 for CSC219 exceeds 24
+CONTEXT:  PL/pgSQL function registration_insert_guard() line 52 at RAISE
+--- the transaction is now aborted: even a read is refused until it ends
+SELECT count(*) FROM registrations;
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+COMMIT;
+ROLLBACK
+--- (COMMIT of an aborted transaction is turned into ROLLBACK, as the line above shows)
+--- 2c. Ngozi does the same, but sets a savepoint before the fifth course
+BEGIN;
+BEGIN
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0005' AND c.code = 'CSC211';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0005' AND c.code = 'CSC213';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0005' AND c.code = 'CSC215';
+INSERT 0 1
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0005' AND c.code = 'CSC217';
+INSERT 0 1
+SAVEPOINT before_fifth;
+SAVEPOINT
+INSERT INTO registrations (student_id, offering_id) SELECT s.student_id, o.offering_id FROM students s, course_offerings o JOIN courses c USING (course_id) JOIN semesters m USING (semester_id) JOIN academic_sessions a USING (session_id) WHERE a.name = '2024/2025' AND m.term = 'first' AND s.matric_no = 'WU/2023/0005' AND c.code = 'CSC219';
+ERROR:  unit limit: 24 registered + 3 for CSC219 exceeds 24
+CONTEXT:  PL/pgSQL function registration_insert_guard() line 52 at RAISE
+ROLLBACK TO SAVEPOINT before_fifth;
+ROLLBACK
+COMMIT;
+COMMIT
+
+=== Afterwards, from a separate connection: registrations in 2024/2025 first semester
+2a Yusuf (rolled back):              0
+2b Kelechi (failed on the 5th):      0
+2c Ngozi (savepoint before the 5th): 4

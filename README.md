@@ -35,7 +35,7 @@ semester GPA and cumulative GPA (CGPA), and generate a transcript.
 |---|---|---|
 | [Portfolio 1](portfolio-1-database-design/README.md) | Database design and modelling | Complete |
 | [Portfolio 2](portfolio-2-query-optimisation/README.md) | Query processing and optimisation | Complete |
-| Portfolio 3 | Transactions and concurrency | Not started |
+| [Portfolio 3](portfolio-3-transactions-concurrency/README.md) | Transactions and concurrency | Complete |
 | Portfolio 4 | NoSQL and advanced data models | Not started |
 | Portfolio 5 | Distributed and cloud database | Not started |
 
@@ -59,10 +59,10 @@ and where the evidence is.
 .
 ├── portfolio-1-database-design/          # P1: design, schema, rule tests, evidence/
 ├── portfolio-2-query-optimisation/       # P2: queries, plans, indexing, analysis, evidence/
+├── portfolio-3-transactions-concurrency/ # P3: commit, rollback, isolation, lost update, evidence/
 ├── compose.yml                           # database services (Docker)
 └── README.md
 ```
 
-Folders for portfolios 3–5 (`portfolio-3-transactions-concurrency/`,
-`portfolio-4-nosql/`, `portfolio-5-distributed-cloud/`) are added as each
-one starts.
+Folders for portfolios 4 and 5 (`portfolio-4-nosql/`,
+`portfolio-5-distributed-cloud/`) are added as each one starts.

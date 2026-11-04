@@ -1,0 +1,14 @@
+Session A reads at t=0 s and t=2 s inside one transaction; session B commits a correction at t=1 s.
+
+=== READ COMMITTED (Zainab's CGPA before: 1.32)
+A: first read,  CGPA = 1.32
+B: committed CSC101 correction to 45.00
+A: second read, CGPA = 1.63
+Fresh read after both committed: CGPA = 1.63
+
+=== REPEATABLE READ (Zainab's CGPA before: 1.63)
+A: first read,  CGPA = 1.63
+B: committed CSC101 correction to 50.00
+A: second read, CGPA = 1.63
+Fresh read after both committed: CGPA = 1.79
+
