@@ -1,0 +1,332 @@
+                             Table "public.faculties"
+      Column      |  Type   | Collation | Nullable |           Default            
+------------------+---------+-----------+----------+------------------------------
+ faculty_id       | integer |           | not null | generated always as identity
+ code             | text    |           | not null | 
+ name             | text    |           | not null | 
+ dean_lecturer_id | integer |           |          | 
+Indexes:
+    "pk_faculties" PRIMARY KEY, btree (faculty_id)
+    "uq_faculties_code" UNIQUE CONSTRAINT, btree (code)
+    "uq_faculties_dean" UNIQUE CONSTRAINT, btree (dean_lecturer_id)
+    "uq_faculties_name" UNIQUE CONSTRAINT, btree (name)
+Check constraints:
+    "chk_faculties_code" CHECK (code ~ '^[A-Z]{2,6}$'::text)
+    "chk_faculties_name" CHECK (btrim(name) <> ''::text)
+Foreign-key constraints:
+    "fk_faculties_dean" FOREIGN KEY (dean_lecturer_id) REFERENCES lecturers(lecturer_id)
+Referenced by:
+    TABLE "departments" CONSTRAINT "fk_departments_faculty" FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id)
+Triggers:
+    trg_faculty_guard BEFORE INSERT OR UPDATE ON faculties FOR EACH ROW EXECUTE FUNCTION faculty_guard()
+
+                            Table "public.departments"
+      Column      |  Type   | Collation | Nullable |           Default            
+------------------+---------+-----------+----------+------------------------------
+ department_id    | integer |           | not null | generated always as identity
+ faculty_id       | integer |           | not null | 
+ code             | text    |           | not null | 
+ name             | text    |           | not null | 
+ head_lecturer_id | integer |           |          | 
+Indexes:
+    "pk_departments" PRIMARY KEY, btree (department_id)
+    "ix_departments_faculty" btree (faculty_id)
+    "uq_departments_code" UNIQUE CONSTRAINT, btree (code)
+    "uq_departments_head" UNIQUE CONSTRAINT, btree (head_lecturer_id)
+    "uq_departments_name" UNIQUE CONSTRAINT, btree (name)
+Check constraints:
+    "chk_departments_code" CHECK (code ~ '^[A-Z]{3}$'::text)
+    "chk_departments_name" CHECK (btrim(name) <> ''::text)
+Foreign-key constraints:
+    "fk_departments_faculty" FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id)
+    "fk_departments_head" FOREIGN KEY (head_lecturer_id, department_id) REFERENCES lecturers(lecturer_id, department_id)
+Referenced by:
+    TABLE "courses" CONSTRAINT "fk_courses_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+    TABLE "lecturers" CONSTRAINT "fk_lecturers_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+    TABLE "programmes" CONSTRAINT "fk_programmes_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+Triggers:
+    trg_department_guard BEFORE INSERT OR UPDATE ON departments FOR EACH ROW EXECUTE FUNCTION department_guard()
+
+                            Table "public.programmes"
+     Column     |   Type   | Collation | Nullable |           Default            
+----------------+----------+-----------+----------+------------------------------
+ programme_id   | integer  |           | not null | generated always as identity
+ department_id  | integer  |           | not null | 
+ code           | text     |           | not null | 
+ name           | text     |           | not null | 
+ award          | text     |           | not null | 
+ duration_years | smallint |           | not null | 
+Indexes:
+    "pk_programmes" PRIMARY KEY, btree (programme_id)
+    "ix_programmes_department" btree (department_id)
+    "uq_programmes_code" UNIQUE CONSTRAINT, btree (code)
+    "uq_programmes_name_award" UNIQUE CONSTRAINT, btree (name, award)
+Check constraints:
+    "chk_programmes_award" CHECK (award = ANY (ARRAY['B.Sc.'::text, 'B.Eng.'::text, 'B.A.'::text, 'B.Tech.'::text]))
+    "chk_programmes_code" CHECK (code ~ '^[A-Z]{3}-[A-Z]{2,5}$'::text)
+    "chk_programmes_duration" CHECK (duration_years >= 4 AND duration_years <= 6)
+    "chk_programmes_name" CHECK (btrim(name) <> ''::text)
+Foreign-key constraints:
+    "fk_programmes_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+Referenced by:
+    TABLE "students" CONSTRAINT "fk_students_programme" FOREIGN KEY (programme_id) REFERENCES programmes(programme_id)
+
+                           Table "public.lecturers"
+    Column     |  Type   | Collation | Nullable |           Default            
+---------------+---------+-----------+----------+------------------------------
+ lecturer_id   | integer |           | not null | generated always as identity
+ department_id | integer |           | not null | 
+ staff_no      | text    |           | not null | 
+ first_name    | text    |           | not null | 
+ last_name     | text    |           | not null | 
+ email         | text    |           | not null | 
+Indexes:
+    "pk_lecturers" PRIMARY KEY, btree (lecturer_id)
+    "ix_lecturers_department" btree (department_id)
+    "uq_lecturers_email" UNIQUE, btree (email)
+    "uq_lecturers_id_department" UNIQUE CONSTRAINT, btree (lecturer_id, department_id)
+    "uq_lecturers_staff_no" UNIQUE CONSTRAINT, btree (staff_no)
+Check constraints:
+    "chk_lecturers_email" CHECK (email = lower(btrim(email)) AND email ~ '^[^@\s]+@[^@\s]+\.[^@\s]+$'::text)
+    "chk_lecturers_names" CHECK (btrim(first_name) <> ''::text AND btrim(last_name) <> ''::text)
+    "chk_lecturers_staff_no" CHECK (staff_no ~ '^WU/STF/[0-9]{4}$'::text)
+Foreign-key constraints:
+    "fk_lecturers_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+Referenced by:
+    TABLE "result_amendments" CONSTRAINT "fk_amendments_amended_by" FOREIGN KEY (amended_by) REFERENCES lecturers(lecturer_id)
+    TABLE "departments" CONSTRAINT "fk_departments_head" FOREIGN KEY (head_lecturer_id, department_id) REFERENCES lecturers(lecturer_id, department_id)
+    TABLE "faculties" CONSTRAINT "fk_faculties_dean" FOREIGN KEY (dean_lecturer_id) REFERENCES lecturers(lecturer_id)
+    TABLE "course_offerings" CONSTRAINT "fk_offerings_lecturer" FOREIGN KEY (lecturer_id) REFERENCES lecturers(lecturer_id)
+    TABLE "results" CONSTRAINT "fk_results_approved_by" FOREIGN KEY (approved_by) REFERENCES lecturers(lecturer_id)
+    TABLE "results" CONSTRAINT "fk_results_entered_by" FOREIGN KEY (entered_by) REFERENCES lecturers(lecturer_id)
+
+                      Table "public.academic_sessions"
+   Column   |  Type   | Collation | Nullable |           Default            
+------------+---------+-----------+----------+------------------------------
+ session_id | integer |           | not null | generated always as identity
+ name       | text    |           | not null | 
+ starts_on  | date    |           | not null | 
+ ends_on    | date    |           | not null | 
+Indexes:
+    "pk_academic_sessions" PRIMARY KEY, btree (session_id)
+    "uq_academic_sessions_name" UNIQUE CONSTRAINT, btree (name)
+Check constraints:
+    "chk_academic_sessions_dates" CHECK (ends_on > starts_on)
+    "chk_academic_sessions_name" CHECK (name ~ '^[0-9]{4}/[0-9]{4}$'::text AND split_part(name, '/'::text, 2)::integer = (split_part(name, '/'::text, 1)::integer + 1))
+Referenced by:
+    TABLE "semesters" CONSTRAINT "fk_semesters_session" FOREIGN KEY (session_id) REFERENCES academic_sessions(session_id)
+    TABLE "students" CONSTRAINT "fk_students_entry_session" FOREIGN KEY (entry_session_id) REFERENCES academic_sessions(session_id)
+
+                          Table "public.semesters"
+   Column    |  Type   | Collation | Nullable |           Default            
+-------------+---------+-----------+----------+------------------------------
+ semester_id | integer |           | not null | generated always as identity
+ session_id  | integer |           | not null | 
+ term        | text    |           | not null | 
+ status      | text    |           | not null | 'planned'::text
+Indexes:
+    "pk_semesters" PRIMARY KEY, btree (semester_id)
+    "uq_semesters_session_term" UNIQUE CONSTRAINT, btree (session_id, term)
+Check constraints:
+    "chk_semesters_status" CHECK (status = ANY (ARRAY['planned'::text, 'registration_open'::text, 'teaching'::text, 'grading'::text, 'closed'::text]))
+    "chk_semesters_term" CHECK (term = ANY (ARRAY['first'::text, 'second'::text]))
+Foreign-key constraints:
+    "fk_semesters_session" FOREIGN KEY (session_id) REFERENCES academic_sessions(session_id)
+Referenced by:
+    TABLE "course_offerings" CONSTRAINT "fk_offerings_semester" FOREIGN KEY (semester_id) REFERENCES semesters(semester_id)
+Triggers:
+    trg_semester_guard BEFORE UPDATE ON semesters FOR EACH ROW EXECUTE FUNCTION semester_guard()
+    trg_semester_insert_guard BEFORE INSERT ON semesters FOR EACH ROW EXECUTE FUNCTION semester_insert_guard()
+
+                             Table "public.students"
+      Column      |  Type   | Collation | Nullable |           Default            
+------------------+---------+-----------+----------+------------------------------
+ student_id       | integer |           | not null | generated always as identity
+ matric_no        | text    |           | not null | 
+ first_name       | text    |           | not null | 
+ last_name        | text    |           | not null | 
+ email            | text    |           | not null | 
+ programme_id     | integer |           | not null | 
+ entry_session_id | integer |           | not null | 
+ status           | text    |           | not null | 'active'::text
+Indexes:
+    "pk_students" PRIMARY KEY, btree (student_id)
+    "ix_students_programme" btree (programme_id)
+    "uq_students_email" UNIQUE, btree (email)
+    "uq_students_matric_no" UNIQUE CONSTRAINT, btree (matric_no)
+Check constraints:
+    "chk_students_email" CHECK (email = lower(btrim(email)) AND email ~ '^[^@\s]+@[^@\s]+\.[^@\s]+$'::text)
+    "chk_students_matric_no" CHECK (matric_no ~ '^WU/[0-9]{4}/[0-9]{4}$'::text)
+    "chk_students_names" CHECK (btrim(first_name) <> ''::text AND btrim(last_name) <> ''::text)
+    "chk_students_status" CHECK (status = ANY (ARRAY['active'::text, 'suspended'::text, 'withdrawn'::text, 'graduated'::text]))
+Foreign-key constraints:
+    "fk_students_entry_session" FOREIGN KEY (entry_session_id) REFERENCES academic_sessions(session_id)
+    "fk_students_programme" FOREIGN KEY (programme_id) REFERENCES programmes(programme_id)
+Referenced by:
+    TABLE "registrations" CONSTRAINT "fk_registrations_student" FOREIGN KEY (student_id) REFERENCES students(student_id)
+
+                             Table "public.courses"
+    Column     |   Type   | Collation | Nullable |           Default            
+---------------+----------+-----------+----------+------------------------------
+ course_id     | integer  |           | not null | generated always as identity
+ department_id | integer  |           | not null | 
+ code          | text     |           | not null | 
+ title         | text     |           | not null | 
+ units         | smallint |           | not null | 
+ level         | smallint |           | not null | 
+ term          | text     |           | not null | 
+Indexes:
+    "pk_courses" PRIMARY KEY, btree (course_id)
+    "ix_courses_department" btree (department_id)
+    "uq_courses_code" UNIQUE CONSTRAINT, btree (code)
+Check constraints:
+    "chk_courses_code" CHECK (code ~ '^[A-Z]{3}[1-5][0-9]{2}$'::text)
+    "chk_courses_level" CHECK (level = (substr(code, 4, 1)::integer * 100))
+    "chk_courses_term" CHECK (term = ANY (ARRAY['first'::text, 'second'::text]))
+    "chk_courses_title" CHECK (btrim(title) <> ''::text)
+    "chk_courses_units" CHECK (units >= 1 AND units <= 6)
+Foreign-key constraints:
+    "fk_courses_department" FOREIGN KEY (department_id) REFERENCES departments(department_id)
+Referenced by:
+    TABLE "course_offerings" CONSTRAINT "fk_offerings_course" FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    TABLE "course_prerequisites" CONSTRAINT "fk_prereq_course" FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    TABLE "course_prerequisites" CONSTRAINT "fk_prereq_prerequisite" FOREIGN KEY (prerequisite_id) REFERENCES courses(course_id)
+
+            Table "public.course_prerequisites"
+     Column      |  Type   | Collation | Nullable | Default 
+-----------------+---------+-----------+----------+---------
+ course_id       | integer |           | not null | 
+ prerequisite_id | integer |           | not null | 
+Indexes:
+    "pk_course_prerequisites" PRIMARY KEY, btree (course_id, prerequisite_id)
+    "ix_prereq_prerequisite" btree (prerequisite_id)
+Check constraints:
+    "chk_prereq_not_self" CHECK (course_id <> prerequisite_id)
+Foreign-key constraints:
+    "fk_prereq_course" FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    "fk_prereq_prerequisite" FOREIGN KEY (prerequisite_id) REFERENCES courses(course_id)
+Triggers:
+    trg_prerequisite_guard BEFORE INSERT OR UPDATE ON course_prerequisites FOR EACH ROW EXECUTE FUNCTION prerequisite_guard()
+
+                       Table "public.course_offerings"
+   Column    |  Type   | Collation | Nullable |           Default            
+-------------+---------+-----------+----------+------------------------------
+ offering_id | integer |           | not null | generated always as identity
+ course_id   | integer |           | not null | 
+ semester_id | integer |           | not null | 
+ lecturer_id | integer |           | not null | 
+ capacity    | integer |           | not null | 
+Indexes:
+    "pk_course_offerings" PRIMARY KEY, btree (offering_id)
+    "ix_offerings_lecturer" btree (lecturer_id)
+    "ix_offerings_semester" btree (semester_id)
+    "uq_offerings_course_semester" UNIQUE CONSTRAINT, btree (course_id, semester_id)
+Check constraints:
+    "chk_offerings_capacity" CHECK (capacity > 0)
+Foreign-key constraints:
+    "fk_offerings_course" FOREIGN KEY (course_id) REFERENCES courses(course_id)
+    "fk_offerings_lecturer" FOREIGN KEY (lecturer_id) REFERENCES lecturers(lecturer_id)
+    "fk_offerings_semester" FOREIGN KEY (semester_id) REFERENCES semesters(semester_id)
+Referenced by:
+    TABLE "registrations" CONSTRAINT "fk_registrations_offering" FOREIGN KEY (offering_id) REFERENCES course_offerings(offering_id)
+Triggers:
+    trg_offering_guard BEFORE INSERT OR UPDATE ON course_offerings FOR EACH ROW EXECUTE FUNCTION offering_guard()
+
+                                   Table "public.registrations"
+     Column      |           Type           | Collation | Nullable |           Default            
+-----------------+--------------------------+-----------+----------+------------------------------
+ registration_id | integer                  |           | not null | generated always as identity
+ student_id      | integer                  |           | not null | 
+ offering_id     | integer                  |           | not null | 
+ status          | text                     |           | not null | 'registered'::text
+ registered_at   | timestamp with time zone |           | not null | now()
+ dropped_at      | timestamp with time zone |           |          | 
+Indexes:
+    "pk_registrations" PRIMARY KEY, btree (registration_id)
+    "ix_registrations_offering" btree (offering_id)
+    "uq_registrations_student_offering" UNIQUE CONSTRAINT, btree (student_id, offering_id)
+Check constraints:
+    "chk_registrations_dropped" CHECK ((status = 'dropped'::text) = (dropped_at IS NOT NULL))
+    "chk_registrations_status" CHECK (status = ANY (ARRAY['registered'::text, 'dropped'::text]))
+Foreign-key constraints:
+    "fk_registrations_offering" FOREIGN KEY (offering_id) REFERENCES course_offerings(offering_id)
+    "fk_registrations_student" FOREIGN KEY (student_id) REFERENCES students(student_id)
+Referenced by:
+    TABLE "results" CONSTRAINT "fk_results_registration" FOREIGN KEY (registration_id) REFERENCES registrations(registration_id)
+Triggers:
+    trg_registration_insert_guard BEFORE INSERT ON registrations FOR EACH ROW EXECUTE FUNCTION registration_insert_guard()
+    trg_registration_update_guard BEFORE UPDATE ON registrations FOR EACH ROW EXECUTE FUNCTION registration_update_guard()
+    trg_registrations_no_delete BEFORE DELETE ON registrations FOR EACH ROW EXECUTE FUNCTION reject_change()
+
+                                                 Table "public.grade_scale"
+   Column    |     Type     | Collation | Nullable |                                 Default                                 
+-------------+--------------+-----------+----------+-------------------------------------------------------------------------
+ grade       | character(1) |           | not null | 
+ min_score   | numeric(5,2) |           | not null | 
+ max_score   | numeric(5,2) |           | not null | 
+ points      | smallint     |           | not null | 
+ score_range | numrange     |           |          | generated always as (numrange(min_score, max_score, '[]'::text)) stored
+Indexes:
+    "pk_grade_scale" PRIMARY KEY, btree (grade)
+    "ex_grade_scale_no_overlap" EXCLUDE USING gist (score_range WITH &&)
+    "uq_grade_scale_points" UNIQUE CONSTRAINT, btree (points)
+Check constraints:
+    "chk_grade_scale_bounds" CHECK (0::numeric <= min_score AND min_score <= max_score AND max_score <= 100::numeric)
+    "chk_grade_scale_points" CHECK (points >= 0 AND points <= 5)
+
+                                      Table "public.results"
+     Column      |           Type           | Collation | Nullable |           Default            
+-----------------+--------------------------+-----------+----------+------------------------------
+ result_id       | integer                  |           | not null | generated always as identity
+ registration_id | integer                  |           | not null | 
+ score           | numeric(5,2)             |           | not null | 
+ status          | text                     |           | not null | 'draft'::text
+ entered_by      | integer                  |           | not null | 
+ entered_at      | timestamp with time zone |           | not null | now()
+ submitted_at    | timestamp with time zone |           |          | 
+ approved_by     | integer                  |           |          | 
+ approved_at     | timestamp with time zone |           |          | 
+Indexes:
+    "pk_results" PRIMARY KEY, btree (result_id)
+    "uq_results_registration" UNIQUE CONSTRAINT, btree (registration_id)
+Check constraints:
+    "chk_results_approved_at" CHECK ((status = 'approved'::text) = (approved_at IS NOT NULL))
+    "chk_results_approved_by" CHECK ((status = 'approved'::text) = (approved_by IS NOT NULL))
+    "chk_results_four_eyes" CHECK (approved_by <> entered_by)
+    "chk_results_score" CHECK (score >= 0::numeric AND score <= 100::numeric)
+    "chk_results_status" CHECK (status = ANY (ARRAY['draft'::text, 'submitted'::text, 'approved'::text]))
+    "chk_results_submitted" CHECK ((status <> 'draft'::text) = (submitted_at IS NOT NULL))
+Foreign-key constraints:
+    "fk_results_approved_by" FOREIGN KEY (approved_by) REFERENCES lecturers(lecturer_id)
+    "fk_results_entered_by" FOREIGN KEY (entered_by) REFERENCES lecturers(lecturer_id)
+    "fk_results_registration" FOREIGN KEY (registration_id) REFERENCES registrations(registration_id)
+Referenced by:
+    TABLE "result_amendments" CONSTRAINT "fk_amendments_result" FOREIGN KEY (result_id) REFERENCES results(result_id)
+Triggers:
+    trg_result_guard BEFORE INSERT OR UPDATE ON results FOR EACH ROW EXECUTE FUNCTION result_guard()
+    trg_results_no_delete BEFORE DELETE ON results FOR EACH ROW EXECUTE FUNCTION reject_change()
+
+                               Table "public.result_amendments"
+    Column    |           Type           | Collation | Nullable |           Default            
+--------------+--------------------------+-----------+----------+------------------------------
+ amendment_id | integer                  |           | not null | generated always as identity
+ result_id    | integer                  |           | not null | 
+ new_score    | numeric(5,2)             |           | not null | 
+ reason       | text                     |           | not null | 
+ amended_by   | integer                  |           | not null | 
+ amended_at   | timestamp with time zone |           | not null | now()
+ revision     | smallint                 |           | not null | 
+Indexes:
+    "pk_result_amendments" PRIMARY KEY, btree (amendment_id)
+    "uq_amendments_result_revision" UNIQUE CONSTRAINT, btree (result_id, revision)
+Check constraints:
+    "chk_amendments_reason" CHECK (length(btrim(reason)) >= 10)
+    "chk_amendments_score" CHECK (new_score >= 0::numeric AND new_score <= 100::numeric)
+Foreign-key constraints:
+    "fk_amendments_amended_by" FOREIGN KEY (amended_by) REFERENCES lecturers(lecturer_id)
+    "fk_amendments_result" FOREIGN KEY (result_id) REFERENCES results(result_id)
+Triggers:
+    trg_amendment_guard BEFORE INSERT ON result_amendments FOR EACH ROW EXECUTE FUNCTION amendment_guard()
+    trg_amendments_no_change BEFORE DELETE OR UPDATE ON result_amendments FOR EACH ROW EXECUTE FUNCTION reject_change()
+    trg_amendments_no_truncate BEFORE TRUNCATE ON result_amendments FOR EACH STATEMENT EXECUTE FUNCTION reject_change()
+

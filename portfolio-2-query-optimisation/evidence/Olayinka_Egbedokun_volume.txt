@@ -1,0 +1,5 @@
+ students | courses | registrations | approved_results | corrections 
+----------+---------+---------------+------------------+-------------
+     4006 |     103 |         96042 |            96042 |         936
+(1 row)
+

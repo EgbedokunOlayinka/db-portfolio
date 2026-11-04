@@ -1,0 +1,8 @@
+         index_name         |  size  
+----------------------------+--------
+ ix_standing_cgpa           | 176 kB
+ ix_standing_programme_cgpa | 176 kB
+ student_standing           | 512 kB
+ uq_standing_student        | 104 kB
+(4 rows)
+

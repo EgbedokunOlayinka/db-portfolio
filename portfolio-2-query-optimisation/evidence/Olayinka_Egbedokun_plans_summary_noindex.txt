@@ -1,0 +1,250 @@
+##### Run 1 of 5
+=== Q4S. Dean's list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=111.85..111.88 rows=10 width=104) (actual time=0.497..0.499 rows=10.00 loops=1)
+   Buffers: shared hit=71
+   InitPlan 1
+     ->  Seq Scan on programmes  (cost=0.00..1.05 rows=1 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+           Filter: (code = 'CSC-BSC'::text)
+           Rows Removed by Filter: 3
+           Buffers: shared hit=1
+   ->  Sort  (cost=110.80..110.85 rows=19 width=104) (actual time=0.496..0.497 rows=10.00 loops=1)
+         Sort Key: st.cgpa DESC, st.matric_no
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=71
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=19 width=104) (actual time=0.020..0.312 rows=1006.00 loops=1)
+               Filter: (programme_id = (InitPlan 1).col1)
+               Rows Removed by Filter: 3000
+               Buffers: shared hit=65
+ Planning:
+   Buffers: shared hit=150
+ Planning Time: 0.346 ms
+ Execution Time: 0.517 ms
+(19 rows)
+
+=== Q5S. Probation list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=115.38..115.45 rows=25 width=80) (actual time=0.572..0.587 rows=318.00 loops=1)
+   Sort Key: st.cgpa, st.matric_no
+   Sort Method: quicksort  Memory: 42kB
+   Buffers: shared hit=65
+   ->  Hash Join  (cost=1.09..114.80 rows=25 width=80) (actual time=0.014..0.285 rows=318.00 loops=1)
+         Hash Cond: (st.programme_id = p.programme_id)
+         Buffers: shared hit=65
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=1237 width=76) (actual time=0.003..0.238 rows=318.00 loops=1)
+               Filter: (cgpa < 1.50)
+               Rows Removed by Filter: 3688
+               Buffers: shared hit=64
+         ->  Hash  (cost=1.04..1.04 rows=4 width=12) (actual time=0.005..0.006 rows=4.00 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on programmes p  (cost=0.00..1.04 rows=4 width=12) (actual time=0.001..0.001 rows=4.00 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=88
+ Planning Time: 0.145 ms
+ Execution Time: 0.605 ms
+(20 rows)
+
+##### Run 2 of 5
+=== Q4S. Dean's list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=111.85..111.88 rows=10 width=104) (actual time=0.489..0.492 rows=10.00 loops=1)
+   Buffers: shared hit=71
+   InitPlan 1
+     ->  Seq Scan on programmes  (cost=0.00..1.05 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+           Filter: (code = 'CSC-BSC'::text)
+           Rows Removed by Filter: 3
+           Buffers: shared hit=1
+   ->  Sort  (cost=110.80..110.85 rows=19 width=104) (actual time=0.488..0.489 rows=10.00 loops=1)
+         Sort Key: st.cgpa DESC, st.matric_no
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=71
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=19 width=104) (actual time=0.015..0.315 rows=1006.00 loops=1)
+               Filter: (programme_id = (InitPlan 1).col1)
+               Rows Removed by Filter: 3000
+               Buffers: shared hit=65
+ Planning:
+   Buffers: shared hit=150
+ Planning Time: 0.284 ms
+ Execution Time: 0.506 ms
+(19 rows)
+
+=== Q5S. Probation list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=115.38..115.45 rows=25 width=80) (actual time=0.661..0.676 rows=318.00 loops=1)
+   Sort Key: st.cgpa, st.matric_no
+   Sort Method: quicksort  Memory: 42kB
+   Buffers: shared hit=65
+   ->  Hash Join  (cost=1.09..114.80 rows=25 width=80) (actual time=0.023..0.347 rows=318.00 loops=1)
+         Hash Cond: (st.programme_id = p.programme_id)
+         Buffers: shared hit=65
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=1237 width=76) (actual time=0.010..0.298 rows=318.00 loops=1)
+               Filter: (cgpa < 1.50)
+               Rows Removed by Filter: 3688
+               Buffers: shared hit=64
+         ->  Hash  (cost=1.04..1.04 rows=4 width=12) (actual time=0.007..0.007 rows=4.00 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on programmes p  (cost=0.00..1.04 rows=4 width=12) (actual time=0.002..0.003 rows=4.00 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=88
+ Planning Time: 0.239 ms
+ Execution Time: 0.703 ms
+(20 rows)
+
+##### Run 3 of 5
+=== Q4S. Dean's list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=111.85..111.88 rows=10 width=104) (actual time=0.488..0.491 rows=10.00 loops=1)
+   Buffers: shared hit=71
+   InitPlan 1
+     ->  Seq Scan on programmes  (cost=0.00..1.05 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+           Filter: (code = 'CSC-BSC'::text)
+           Rows Removed by Filter: 3
+           Buffers: shared hit=1
+   ->  Sort  (cost=110.80..110.85 rows=19 width=104) (actual time=0.487..0.488 rows=10.00 loops=1)
+         Sort Key: st.cgpa DESC, st.matric_no
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=71
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=19 width=104) (actual time=0.017..0.326 rows=1006.00 loops=1)
+               Filter: (programme_id = (InitPlan 1).col1)
+               Rows Removed by Filter: 3000
+               Buffers: shared hit=65
+ Planning:
+   Buffers: shared hit=150
+ Planning Time: 0.338 ms
+ Execution Time: 0.508 ms
+(19 rows)
+
+=== Q5S. Probation list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=115.38..115.45 rows=25 width=80) (actual time=0.707..0.724 rows=318.00 loops=1)
+   Sort Key: st.cgpa, st.matric_no
+   Sort Method: quicksort  Memory: 42kB
+   Buffers: shared hit=65
+   ->  Hash Join  (cost=1.09..114.80 rows=25 width=80) (actual time=0.053..0.412 rows=318.00 loops=1)
+         Hash Cond: (st.programme_id = p.programme_id)
+         Buffers: shared hit=65
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=1237 width=76) (actual time=0.003..0.322 rows=318.00 loops=1)
+               Filter: (cgpa < 1.50)
+               Rows Removed by Filter: 3688
+               Buffers: shared hit=64
+         ->  Hash  (cost=1.04..1.04 rows=4 width=12) (actual time=0.042..0.043 rows=4.00 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on programmes p  (cost=0.00..1.04 rows=4 width=12) (actual time=0.001..0.032 rows=4.00 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=88
+ Planning Time: 0.117 ms
+ Execution Time: 0.746 ms
+(20 rows)
+
+##### Run 4 of 5
+=== Q4S. Dean's list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=111.85..111.88 rows=10 width=104) (actual time=0.491..0.494 rows=10.00 loops=1)
+   Buffers: shared hit=71
+   InitPlan 1
+     ->  Seq Scan on programmes  (cost=0.00..1.05 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+           Filter: (code = 'CSC-BSC'::text)
+           Rows Removed by Filter: 3
+           Buffers: shared hit=1
+   ->  Sort  (cost=110.80..110.85 rows=19 width=104) (actual time=0.491..0.491 rows=10.00 loops=1)
+         Sort Key: st.cgpa DESC, st.matric_no
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=71
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=19 width=104) (actual time=0.016..0.333 rows=1006.00 loops=1)
+               Filter: (programme_id = (InitPlan 1).col1)
+               Rows Removed by Filter: 3000
+               Buffers: shared hit=65
+ Planning:
+   Buffers: shared hit=150
+ Planning Time: 0.299 ms
+ Execution Time: 0.511 ms
+(19 rows)
+
+=== Q5S. Probation list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=115.38..115.45 rows=25 width=80) (actual time=0.626..0.642 rows=318.00 loops=1)
+   Sort Key: st.cgpa, st.matric_no
+   Sort Method: quicksort  Memory: 42kB
+   Buffers: shared hit=65
+   ->  Hash Join  (cost=1.09..114.80 rows=25 width=80) (actual time=0.016..0.335 rows=318.00 loops=1)
+         Hash Cond: (st.programme_id = p.programme_id)
+         Buffers: shared hit=65
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=1237 width=76) (actual time=0.005..0.290 rows=318.00 loops=1)
+               Filter: (cgpa < 1.50)
+               Rows Removed by Filter: 3688
+               Buffers: shared hit=64
+         ->  Hash  (cost=1.04..1.04 rows=4 width=12) (actual time=0.006..0.006 rows=4.00 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on programmes p  (cost=0.00..1.04 rows=4 width=12) (actual time=0.002..0.002 rows=4.00 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=88
+ Planning Time: 0.151 ms
+ Execution Time: 0.665 ms
+(20 rows)
+
+##### Run 5 of 5
+=== Q4S. Dean's list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=111.85..111.88 rows=10 width=104) (actual time=0.503..0.506 rows=10.00 loops=1)
+   Buffers: shared hit=71
+   InitPlan 1
+     ->  Seq Scan on programmes  (cost=0.00..1.05 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+           Filter: (code = 'CSC-BSC'::text)
+           Rows Removed by Filter: 3
+           Buffers: shared hit=1
+   ->  Sort  (cost=110.80..110.85 rows=19 width=104) (actual time=0.502..0.503 rows=10.00 loops=1)
+         Sort Key: st.cgpa DESC, st.matric_no
+         Sort Method: top-N heapsort  Memory: 26kB
+         Buffers: shared hit=71
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=19 width=104) (actual time=0.017..0.339 rows=1006.00 loops=1)
+               Filter: (programme_id = (InitPlan 1).col1)
+               Rows Removed by Filter: 3000
+               Buffers: shared hit=65
+ Planning:
+   Buffers: shared hit=150
+ Planning Time: 0.332 ms
+ Execution Time: 0.524 ms
+(19 rows)
+
+=== Q5S. Probation list from the precomputed standing
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=115.38..115.45 rows=25 width=80) (actual time=0.676..0.692 rows=318.00 loops=1)
+   Sort Key: st.cgpa, st.matric_no
+   Sort Method: quicksort  Memory: 42kB
+   Buffers: shared hit=65
+   ->  Hash Join  (cost=1.09..114.80 rows=25 width=80) (actual time=0.018..0.341 rows=318.00 loops=1)
+         Hash Cond: (st.programme_id = p.programme_id)
+         Buffers: shared hit=65
+         ->  Seq Scan on student_standing st  (cost=0.00..110.40 rows=1237 width=76) (actual time=0.006..0.293 rows=318.00 loops=1)
+               Filter: (cgpa < 1.50)
+               Rows Removed by Filter: 3688
+               Buffers: shared hit=64
+         ->  Hash  (cost=1.04..1.04 rows=4 width=12) (actual time=0.007..0.007 rows=4.00 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on programmes p  (cost=0.00..1.04 rows=4 width=12) (actual time=0.002..0.002 rows=4.00 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=88
+ Planning Time: 0.165 ms
+ Execution Time: 0.712 ms
+(20 rows)
+

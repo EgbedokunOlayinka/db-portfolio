@@ -1,0 +1,17 @@
+=== A correction is made after the last refresh (inside a transaction that is rolled back)
+BEGIN
+INSERT 0 1
+=== Students whose stored CGPA no longer matches the live one (one correction was made, so expect 1)
+         result         
+------------------------
+ stale_before_refresh=1
+(1 row)
+
+REFRESH MATERIALIZED VIEW
+=== The same check after a refresh
+        result         
+-----------------------
+ stale_after_refresh=0
+(1 row)
+
+ROLLBACK

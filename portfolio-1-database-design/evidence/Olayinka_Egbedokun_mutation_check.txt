@@ -1,0 +1,17 @@
+For each trigger: the schema is rebuilt without it, every test is rerun,
+and the tests that now fail are listed. Every trigger must be caught.
+
+trg_amendment_guard (result_amendments): scenario stopped: ERROR:  null value in column "revision" of relation "result_amendments" violates not-null constraint
+trg_amendments_no_change (result_amendments): 2 failing: T58 T63 
+trg_amendments_no_truncate (result_amendments): 3 failing: T62 T88 T89 
+trg_department_guard (departments): 1 failing: T77 
+trg_faculty_guard (faculties): 2 failing: T54 T76 
+trg_offering_guard (course_offerings): 3 failing: T25 T28 T85 
+trg_prerequisite_guard (course_prerequisites): 2 failing: T22 T23 
+trg_registration_insert_guard (registrations): 8 failing: T32 T33 T34 T35 T36 T37 T39 T81 
+trg_registration_update_guard (registrations): scenario stopped: ERROR:  new row for relation "registrations" violates check constraint "chk_registrations_dropped"
+trg_registrations_no_delete (registrations): 1 failing: T61 
+trg_result_guard (results): scenario stopped: ERROR:  new row for relation "results" violates check constraint "chk_results_submitted"
+trg_results_no_delete (results): 1 failing: T60 
+trg_semester_guard (semesters): 4 failing: T27 T30 T31 T86 
+trg_semester_insert_guard (semesters): 1 failing: T29 

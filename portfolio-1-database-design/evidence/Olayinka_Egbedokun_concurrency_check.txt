@@ -1,0 +1,18 @@
+Each course has capacity 1. Session A begins at the isolation level shown
+and reads; session B then registers and commits; A then registers.
+
+== READ COMMITTED, CSC301
+Session B: INSERT 0 1
+Session A: ERROR:  CSC301 is full (1 of 1 places taken)
+Places taken: 1 of 1
+
+== REPEATABLE READ, CSC303
+Session B: INSERT 0 1
+Session A: ERROR:  could not serialize access due to concurrent update
+Places taken: 1 of 1
+
+== SERIALIZABLE, CSC305
+Session B: INSERT 0 1
+Session A: ERROR:  could not serialize access due to concurrent update
+Places taken: 1 of 1
+

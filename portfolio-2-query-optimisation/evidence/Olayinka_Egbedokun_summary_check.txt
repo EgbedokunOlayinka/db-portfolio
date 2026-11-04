@@ -1,0 +1,3 @@
+Q4S vs Q4 on the full data: 10 rows, identical
+Q5S vs Q5 on the full data: 318 rows, identical
+Every student's stored standing vs the live CGPA view: 0 rows differ (both directions)

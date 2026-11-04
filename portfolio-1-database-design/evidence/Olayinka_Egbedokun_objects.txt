@@ -1,0 +1,47 @@
+                 List of tables
+ Schema |         Name         | Type  | Owner  
+--------+----------------------+-------+--------
+ public | academic_sessions    | table | wavers
+ public | course_offerings     | table | wavers
+ public | course_prerequisites | table | wavers
+ public | courses              | table | wavers
+ public | departments          | table | wavers
+ public | faculties            | table | wavers
+ public | grade_scale          | table | wavers
+ public | lecturers            | table | wavers
+ public | programmes           | table | wavers
+ public | registrations        | table | wavers
+ public | result_amendments    | table | wavers
+ public | results              | table | wavers
+ public | semesters            | table | wavers
+ public | students             | table | wavers
+(14 rows)
+
+               List of views
+ Schema |       Name        | Type | Owner  
+--------+-------------------+------+--------
+ public | effective_results | view | wavers
+ public | graded_courses    | view | wavers
+ public | semester_gpa      | view | wavers
+ public | student_cgpa      | view | wavers
+ public | transcript        | view | wavers
+(5 rows)
+
+                                           List of functions
+ Schema |           Name            | Result data type |          Argument data types           | Type 
+--------+---------------------------+------------------+----------------------------------------+------
+ public | amendment_guard           | trigger          |                                        | func
+ public | department_guard          | trigger          |                                        | func
+ public | faculty_guard             | trigger          |                                        | func
+ public | has_passed                | boolean          | p_student integer, p_course integer    | func
+ public | offering_guard            | trigger          |                                        | func
+ public | prerequisite_guard        | trigger          |                                        | func
+ public | registration_insert_guard | trigger          |                                        | func
+ public | registration_update_guard | trigger          |                                        | func
+ public | reject_change             | trigger          |                                        | func
+ public | result_authority          | integer          | p_course integer, p_entered_by integer | func
+ public | result_guard              | trigger          |                                        | func
+ public | semester_guard            | trigger          |                                        | func
+ public | semester_insert_guard     | trigger          |                                        | func
+(13 rows)
+

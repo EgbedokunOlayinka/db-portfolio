@@ -1,0 +1,3 @@
+query runs    plan_ms    exec_ms   total_ms   buffers
+Q4S      5      0.377      0.076      0.488        13
+Q5S      5      0.191      0.591      0.764        52

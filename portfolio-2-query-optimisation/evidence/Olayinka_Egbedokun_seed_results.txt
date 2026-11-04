@@ -1,0 +1,48 @@
+=== Q1. Transcript of one student
+  session  |  term  |  code  |            title            | units | score | grade | points | amended 
+-----------+--------+--------+-----------------------------+-------+-------+-------+--------+---------
+ 2023/2024 | first  | CHM101 | General Chemistry I         |     2 | 50.00 | C     |      3 | f
+ 2023/2024 | first  | CSC101 | Introduction to Computing   |     3 | 39.99 | F     |      0 | f
+ 2023/2024 | first  | CSC103 | Computing Laboratory        |     2 | 45.00 | D     |      2 | f
+ 2023/2024 | first  | MTH101 | Elementary Mathematics I    |     3 | 40.00 | E     |      1 | f
+ 2023/2024 | first  | PHY101 | General Physics I           |     3 | 52.00 | C     |      3 | t
+ 2023/2024 | second | CSC102 | Introduction to Programming |     3 | 35.00 | F     |      0 | f
+ 2023/2024 | second | MTH102 | Elementary Mathematics II   |     3 | 42.00 | E     |      1 | f
+(7 rows)
+
+=== Q2. Semester GPA and CGPA of one student
+  session  |  term  | units_taken | units_passed | gpa  | cgpa 
+-----------+--------+-------------+--------------+------+------
+ 2023/2024 | first  |          13 |           10 | 1.69 | 1.32
+ 2023/2024 | second |           6 |            3 | 0.50 | 1.32
+(2 rows)
+
+=== Q3. Result sheet of one course offering (every registered student)
+  matric_no   | student_name  | score | grade |  status  | amended 
+--------------+---------------+-------+-------+----------+---------
+ WU/2023/0001 | Nwosu, Amaka  | 72.00 | A     | approved | f
+ WU/2023/0002 | Bakare, Tunde | 58.00 | C     | approved | f
+ WU/2023/0003 | Bello, Zainab | 52.00 | C     | approved | t
+ WU/2023/0004 | Obi, Kelechi  | 59.99 | C     | approved | f
+ WU/2023/0005 | Eze, Ngozi    | 10.00 | F     | approved | f
+ WU/2023/0006 | Lawal, Yusuf  | 85.00 | A     | approved | f
+(6 rows)
+
+=== Q4. Dean's list: top 10 CGPAs in one programme
+  matric_no   | student_name  | units_taken | cgpa 
+--------------+---------------+-------------+------
+ WU/2023/0001 | Nwosu, Amaka  |          19 | 4.89
+ WU/2023/0006 | Lawal, Yusuf  |          19 | 4.11
+ WU/2023/0004 | Obi, Kelechi  |          19 | 3.32
+ WU/2023/0002 | Bakare, Tunde |          19 | 2.89
+ WU/2023/0003 | Bello, Zainab |          19 | 1.32
+ WU/2023/0005 | Eze, Ngozi    |          19 | 0.26
+(6 rows)
+
+=== Q5. Probation list: every student with CGPA below 1.50
+  matric_no   | programme | units_taken | cgpa 
+--------------+-----------+-------------+------
+ WU/2023/0005 | CSC-BSC   |          19 | 0.26
+ WU/2023/0003 | CSC-BSC   |          19 | 1.32
+(2 rows)
+

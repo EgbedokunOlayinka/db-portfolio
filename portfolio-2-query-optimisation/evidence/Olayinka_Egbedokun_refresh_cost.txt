@@ -1,0 +1,38 @@
+Timing is on.
+=== Refresh with its three indexes, then without them (indexes dropped inside a rolled-back transaction), alternating, 3 rounds
+round 1 with
+REFRESH MATERIALIZED VIEW
+Time: 426.415 ms
+BEGIN
+Time: 0.073 ms
+DROP INDEX
+Time: 0.415 ms
+round 1 without
+REFRESH MATERIALIZED VIEW
+Time: 342.391 ms
+ROLLBACK
+Time: 0.579 ms
+BEGIN
+Time: 0.099 ms
+DROP INDEX
+Time: 0.369 ms
+round 2 without
+REFRESH MATERIALIZED VIEW
+Time: 336.708 ms
+ROLLBACK
+Time: 0.420 ms
+round 2 with
+REFRESH MATERIALIZED VIEW
+Time: 361.907 ms
+round 3 with
+REFRESH MATERIALIZED VIEW
+Time: 358.979 ms
+BEGIN
+Time: 0.071 ms
+DROP INDEX
+Time: 0.329 ms
+round 3 without
+REFRESH MATERIALIZED VIEW
+Time: 341.447 ms
+ROLLBACK
+Time: 0.514 ms

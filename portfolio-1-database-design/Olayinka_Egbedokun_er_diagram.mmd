@@ -1,0 +1,129 @@
+erDiagram
+    FACULTIES ||--o{ DEPARTMENTS : "has"
+    LECTURERS |o--o| FACULTIES : "is dean of"
+    DEPARTMENTS ||--o{ LECTURERS : "employs"
+    LECTURERS |o--o| DEPARTMENTS : "is head of"
+    DEPARTMENTS ||--o{ PROGRAMMES : "runs"
+    DEPARTMENTS ||--o{ COURSES : "owns"
+    PROGRAMMES ||--o{ STUDENTS : "enrols"
+    ACADEMIC_SESSIONS ||--o{ STUDENTS : "is entry session of"
+    ACADEMIC_SESSIONS ||--o{ SEMESTERS : "is divided into"
+    COURSES ||--o{ COURSE_PREREQUISITES : "requires"
+    COURSES ||--o{ COURSE_PREREQUISITES : "is required by"
+    COURSES ||--o{ COURSE_OFFERINGS : "is offered as"
+    SEMESTERS ||--o{ COURSE_OFFERINGS : "schedules"
+    LECTURERS ||--o{ COURSE_OFFERINGS : "teaches"
+    STUDENTS ||--o{ REGISTRATIONS : "makes"
+    COURSE_OFFERINGS ||--o{ REGISTRATIONS : "receives"
+    REGISTRATIONS ||--o| RESULTS : "is graded by"
+    LECTURERS ||--o{ RESULTS : "enters"
+    LECTURERS |o--o{ RESULTS : "approves"
+    RESULTS ||--o{ RESULT_AMENDMENTS : "is corrected by"
+    LECTURERS ||--o{ RESULT_AMENDMENTS : "makes"
+
+    FACULTIES {
+        int faculty_id PK
+        text code UK "e.g. SCI"
+        text name UK
+        int dean_lecturer_id FK, UK "nullable; in this faculty; never a head"
+    }
+    DEPARTMENTS {
+        int department_id PK
+        int faculty_id FK
+        text code UK "e.g. CSC"
+        text name UK
+        int head_lecturer_id FK, UK "nullable; FK with department_id to lecturers"
+    }
+    PROGRAMMES {
+        int programme_id PK
+        int department_id FK
+        text code UK "e.g. CSC-BSC"
+        text name "UK with award"
+        text award "B.Sc. / B.Eng. / B.A. / B.Tech."
+        smallint duration_years "4 to 6"
+    }
+    LECTURERS {
+        int lecturer_id PK
+        int department_id FK
+        text staff_no UK "WU/STF/nnnn"
+        text first_name
+        text last_name
+        text email UK "lower case"
+    }
+    ACADEMIC_SESSIONS {
+        int session_id PK
+        text name UK "e.g. 2025/2026"
+        date starts_on
+        date ends_on "after starts_on"
+    }
+    SEMESTERS {
+        int semester_id PK
+        int session_id FK "UK with term"
+        text term "first or second"
+        text status "planned to closed in order"
+    }
+    STUDENTS {
+        int student_id PK
+        text matric_no UK "WU/yyyy/nnnn"
+        text first_name
+        text last_name
+        text email UK "lower case"
+        int programme_id FK
+        int entry_session_id FK
+        text status "active / suspended / withdrawn / graduated"
+    }
+    COURSES {
+        int course_id PK
+        int department_id FK
+        text code UK "e.g. CSC201"
+        text title
+        smallint units "1 to 6"
+        smallint level "from the code"
+        text term "first or second"
+    }
+    COURSE_PREREQUISITES {
+        int course_id PK, FK
+        int prerequisite_id PK, FK "lower level than course"
+    }
+    COURSE_OFFERINGS {
+        int offering_id PK
+        int course_id FK "UK with semester_id"
+        int semester_id FK
+        int lecturer_id FK
+        int capacity "above 0"
+    }
+    REGISTRATIONS {
+        int registration_id PK
+        int student_id FK "UK with offering_id"
+        int offering_id FK
+        text status "registered or dropped"
+        timestamptz registered_at
+        timestamptz dropped_at "set only when dropped"
+    }
+    RESULTS {
+        int result_id PK
+        int registration_id FK, UK
+        numeric score "0 to 100"
+        text status "draft / submitted / approved"
+        int entered_by FK
+        timestamptz entered_at
+        timestamptz submitted_at
+        int approved_by FK "not entered_by"
+        timestamptz approved_at
+    }
+    RESULT_AMENDMENTS {
+        int amendment_id PK
+        int result_id FK
+        numeric new_score "0 to 100"
+        text reason "at least 10 characters"
+        int amended_by FK
+        timestamptz amended_at
+        smallint revision "UK with result_id; 1 2 3 in order made"
+    }
+    GRADE_SCALE {
+        char grade PK "A to F"
+        numeric min_score
+        numeric max_score
+        smallint points UK "0 to 5"
+        numrange score_range "generated; ranges never overlap"
+    }

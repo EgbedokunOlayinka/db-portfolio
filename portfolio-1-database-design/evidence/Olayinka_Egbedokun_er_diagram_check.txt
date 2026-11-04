@@ -1,0 +1,5 @@
+Columns: diagram 78, database 78
+Relationships: diagram 21, foreign keys 21
+
+Differences in columns (< diagram only, > database only):
+Differences in relationships (< diagram only, > database only):

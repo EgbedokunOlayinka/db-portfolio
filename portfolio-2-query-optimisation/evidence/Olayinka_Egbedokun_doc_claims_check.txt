@@ -1,0 +1,16 @@
+OK    analysis: Q3 baseline = 10249 buffers
+OK    analysis: Q3 without_indexes = 10775 buffers
+OK    analysis: Q4S summary_indexed = 13 buffers
+OK    analysis: Q5 baseline = 194880 buffers
+OK    analysis: Q4 baseline = 195678 buffers
+OK    analysis: Q4 jit_off = 195678 buffers
+OK    analysis: Q4 without_indexes = 195678 buffers
+OK    analysis: Q1 baseline = 256 buffers
+OK    analysis: Q2 without_indexes = 4366 buffers
+OK    analysis: Q5S summary_indexed = 52 buffers
+OK    analysis: Q5S summary_noindex = 65 buffers
+OK    analysis: Q4S summary_noindex = 71 buffers
+OK    analysis: Q2 baseline = 880 buffers
+OK    analysis: Q1 without_indexes = 933 buffers
+OK    portfolio-2-query-optimisation/README.md: "4,006 students"
+OK    portfolio-2-query-optimisation/Olayinka_Egbedokun_analysis.md: "96,042 approved results"

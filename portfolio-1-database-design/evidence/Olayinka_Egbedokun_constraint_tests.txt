@@ -1,0 +1,545 @@
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+ expect_error 
+--------------
+ 
+
+ expect_true 
+-------------
+ 
+
+
+=== Test log ===
+ test_id |  rule   | verdict |                                                                  detail                                                                   
+---------+---------+---------+-------------------------------------------------------------------------------------------------------------------------------------------
+ H0      | harness | PASS    | the harness records an accepted statement, and a rejection by the wrong rule, as FAIL
+ P01     | R14     | PASS    | a course can be dropped while registration is open; dropped_at is set by the database
+ P02     | R17     | PASS    | results move from draft to submitted; submitted_at is set by the database
+ P03     | R17     | PASS    | a submitted result can be returned to draft, corrected and resubmitted
+ P04     | R17     | PASS    | results approved by the head, or by the dean when the head marked the course
+ P05     | R20     | PASS    | grades derived from scores: 65.00=B, 72.50=A, 30.00=F, 44.99=E
+ P06     | R20     | PASS    | semester GPA matches hand calculation: 4.50 and 0.50
+ P07     | R19     | PASS    | an amendment changes the effective score and GPA (0.50 -> 1.00) and leaves the approved row as it was
+ P08     | R15     | PASS    | a semester closes once every registration has an approved result
+ P09     | R12     | PASS    | Amaka registers for CSC201 after passing its prerequisite CSC101
+ P10     | R13     | PASS    | Tunde retakes CSC101, which he failed
+ P11     | R11     | PASS    | Amaka holds 21 units this semester, within the 24-unit limit
+ P12     | R20     | PASS    | every score from 0.00 to 100.00 maps to exactly one grade (10,001 scores, no gaps, no overlaps)
+ P13     | R22     | PASS    | portal_app registers, enters, submits and approves a result (58.50 = C) with only its grants
+ P14     | R19     | PASS    | the latest correction counts (48.00); corrections are numbered 1, 2 by the database
+ P15     | R22     | PASS    | portal_app has no DELETE, TRUNCATE, TRIGGER or REFERENCES grant, owns nothing, and cannot create temporary tables
+ T01     | R1      | PASS    | rejected by uq_students_matric_no: duplicate key value violates unique constraint "uq_students_matric_no"
+ T02     | R1      | PASS    | rejected by chk_students_matric_no: new row for relation "students" violates check constraint "chk_students_matric_no"
+ T03     | R1      | PASS    | rejected by uq_students_email: duplicate key value violates unique constraint "uq_students_email"
+ T04     | R1      | PASS    | rejected by chk_students_email: new row for relation "students" violates check constraint "chk_students_email"
+ T05     | R1      | PASS    | rejected by chk_students_names: new row for relation "students" violates check constraint "chk_students_names"
+ T06     | R1      | PASS    | rejected by chk_students_status: new row for relation "students" violates check constraint "chk_students_status"
+ T07     | R1      | PASS    | rejected by fk_students_programme: insert or update on table "students" violates foreign key constraint "fk_students_programme"
+ T08     | R2      | PASS    | rejected by chk_lecturers_staff_no: new row for relation "lecturers" violates check constraint "chk_lecturers_staff_no"
+ T09     | R2      | PASS    | rejected by uq_lecturers_staff_no: duplicate key value violates unique constraint "uq_lecturers_staff_no"
+ T10     | R2      | PASS    | rejected by uq_lecturers_email: duplicate key value violates unique constraint "uq_lecturers_email"
+ T11     | R3      | PASS    | rejected by chk_faculties_code: new row for relation "faculties" violates check constraint "chk_faculties_code"
+ T12     | R3      | PASS    | rejected by uq_departments_code: duplicate key value violates unique constraint "uq_departments_code"
+ T13     | R3      | PASS    | rejected by chk_programmes_award: new row for relation "programmes" violates check constraint "chk_programmes_award"
+ T14     | R4      | PASS    | rejected by uq_courses_code: duplicate key value violates unique constraint "uq_courses_code"
+ T15     | R4      | PASS    | rejected by chk_courses_code: new row for relation "courses" violates check constraint "chk_courses_code"
+ T16     | R4      | PASS    | rejected by chk_courses_units: new row for relation "courses" violates check constraint "chk_courses_units"
+ T17     | R4      | PASS    | rejected by chk_courses_level: new row for relation "courses" violates check constraint "chk_courses_level"
+ T18     | R5      | PASS    | rejected by chk_academic_sessions_name: new row for relation "academic_sessions" violates check constraint "chk_academic_sessions_name"
+ T19     | R5      | PASS    | rejected by chk_academic_sessions_dates: new row for relation "academic_sessions" violates check constraint "chk_academic_sessions_dates"
+ T20     | R5      | PASS    | rejected by uq_semesters_session_term: duplicate key value violates unique constraint "uq_semesters_session_term"
+ T21     | R6      | PASS    | rejected by chk_prereq_not_self: new row for relation "course_prerequisites" violates check constraint "chk_prereq_not_self"
+ T22     | R6      | PASS    | rejected by trg_prerequisite_level: prerequisite must be a lower-level course (200 level is not below 100 level)
+ T23     | R6      | PASS    | rejected by trg_prerequisite_level: prerequisite must be a lower-level course (200 level is not below 200 level)
+ T24     | R7      | PASS    | rejected by uq_offerings_course_semester: duplicate key value violates unique constraint "uq_offerings_course_semester"
+ T25     | R7      | PASS    | rejected by trg_offering_term: course is taught in the second semester, not the first
+ T26     | R7      | PASS    | rejected by chk_offerings_capacity: new row for relation "course_offerings" violates check constraint "chk_offerings_capacity"
+ T27     | R15     | PASS    | rejected by trg_semester_close: semester 1 cannot close: 4 registrations have no approved result
+ T28     | R7      | PASS    | rejected by trg_offering_capacity: capacity 1 is below the 2 students already registered
+ T29     | R15     | PASS    | rejected by trg_semester_new_planned: a new semester starts as planned, not registration_open
+ T30     | R15     | PASS    | rejected by trg_semester_order: semester 4 cannot move from planned to teaching
+ T31     | R15     | PASS    | rejected by trg_semester_order: semester 3 cannot move from registration_open to planned
+ T32     | R8      | PASS    | rejected by trg_registration_window: registration for this semester is not open (status planned)
+ T33     | R9      | PASS    | rejected by trg_registration_student_active: student 3 is suspended and cannot register
+ T34     | R10     | PASS    | rejected by trg_registration_capacity: CSC219 is full (2 of 2 places taken)
+ T35     | R11     | PASS    | rejected by trg_registration_unit_limit: unit limit: 21 registered + 6 for CSC217 exceeds 24
+ T36     | R12     | PASS    | rejected by trg_registration_prerequisite: CSC201 requires a pass in: CSC101
+ T37     | R13     | PASS    | rejected by trg_registration_already_passed: CSC101 has already been passed
+ T38     | R13     | PASS    | rejected by uq_registrations_student_offering: duplicate key value violates unique constraint "uq_registrations_student_offering"
+ T39     | R13     | PASS    | rejected by trg_registration_new: a new registration must have status registered
+ T40     | R14     | PASS    | rejected by trg_registration_drop_final: registration 5 cannot go from dropped to registered
+ T41     | R14     | PASS    | rejected by trg_registration_drop_window: courses can only be dropped while registration is open (status closed)
+ T42     | R14     | PASS    | rejected by trg_registration_immutable: registration 11: only its status can change
+ T43     | R16     | PASS    | rejected by chk_results_score: new row for relation "results" violates check constraint "chk_results_score"
+ T44     | R16     | PASS    | rejected by trg_result_window: results can only be entered or changed while the semester is grading (status registration_open)
+ T45     | R17     | PASS    | rejected by trg_result_workflow: result 1 cannot go from draft to approved
+ T46     | R17     | PASS    | rejected by trg_result_score_locked: result 1: the score can only change while it is a draft
+ T47     | R17     | PASS    | rejected by trg_result_approver: only the head of the course's department (or the dean, if the head marked it) can approve this result
+ T48     | R17     | PASS    | rejected by trg_result_approver: only the head of the course's department (or the dean, if the head marked it) can approve this result
+ T49     | R16     | PASS    | rejected by trg_result_registered: registration 5 was dropped; no result can be entered
+ T50     | R16     | PASS    | rejected by uq_results_registration: duplicate key value violates unique constraint "uq_results_registration"
+ T51     | R17     | PASS    | rejected by trg_result_final: result 1 is approved and final; record a correction in result_amendments
+ T52     | R18     | PASS    | rejected by fk_departments_head: insert or update on table "departments" violates foreign key constraint "fk_departments_head"
+ T53     | R19     | PASS    | rejected by trg_amendment_approved_only: result 1 is not approved; change it through the normal workflow
+ T54     | R18     | PASS    | rejected by trg_faculty_dean: the dean must be a lecturer in one of the faculty's departments
+ T55     | R19     | PASS    | rejected by trg_amendment_by_head: only the head of the course's department (or the dean, if the head marked it) can amend this result
+ T56     | R19     | PASS    | rejected by trg_amendment_changes_score: amendment does not change the score (already 48.00)
+ T57     | R19     | PASS    | rejected by chk_amendments_reason: new row for relation "result_amendments" violates check constraint "chk_amendments_reason"
+ T58     | R19     | PASS    | rejected by trg_records_permanent: UPDATE on result_amendments is not allowed: academic records are permanent
+ T59     | R20     | PASS    | rejected by ex_grade_scale_no_overlap: conflicting key value violates exclusion constraint "ex_grade_scale_no_overlap"
+ T60     | R21     | PASS    | rejected by trg_records_permanent: DELETE on results is not allowed: academic records are permanent
+ T61     | R21     | PASS    | rejected by trg_records_permanent: DELETE on registrations is not allowed: academic records are permanent
+ T62     | R21     | PASS    | rejected by trg_records_permanent: TRUNCATE on result_amendments is not allowed: academic records are permanent
+ T63     | R21     | PASS    | rejected by trg_records_permanent: DELETE on result_amendments is not allowed: academic records are permanent
+ T64     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table students
+ T65     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table results
+ T66     | R22     | PASS    | rejected by sqlstate:42501: must be owner of table results
+ T67     | R22     | PASS    | rejected by sqlstate:42501: permission denied to set parameter "session_replication_role"
+ T68     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table grade_scale
+ T69     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table registrations
+ T70     | R16     | PASS    | rejected by trg_result_lecturer: only the lecturer assigned to the course can enter its results
+ T71     | R16     | PASS    | rejected by trg_result_new_draft: a result is entered as draft, not approved
+ T72     | R17     | PASS    | rejected by trg_result_workflow: result 1 cannot go from submitted to submitted
+ T73     | R14     | PASS    | rejected by trg_registration_drop_window: courses can only be dropped while registration is open (status teaching)
+ T74     | R3      | PASS    | rejected by chk_programmes_code: new row for relation "programmes" violates check constraint "chk_programmes_code"
+ T75     | R3      | PASS    | rejected by uq_programmes_name_award: duplicate key value violates unique constraint "uq_programmes_name_award"
+ T76     | R18     | PASS    | rejected by trg_dean_not_head: a head of department cannot also be a dean
+ T77     | R18     | PASS    | rejected by trg_dean_not_head: a dean cannot also be a head of department
+ T78     | R18     | PASS    | rejected by uq_departments_head: duplicate key value violates unique constraint "uq_departments_head"
+ T79     | R17     | PASS    | rejected by chk_results_approved_by: new row for relation "results" violates check constraint "chk_results_approved_by"
+ T80     | R22     | PASS    | rejected by sqlstate:42501: permission denied for schema pg_temp
+ T81     | R22     | PASS    | rejected by trg_registration_prerequisite: CSC201 requires a pass in: CSC101
+ T82     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table faculties
+ T83     | R22     | PASS    | rejected by sqlstate:42501: permission denied for table registrations
+ T84     | R17     | PASS    | rejected by trg_result_immutable: result 1: registration and entry details cannot change
+ T85     | R7      | PASS    | rejected by trg_offering_immutable: offering 5: course and semester cannot be changed
+ T86     | R15     | PASS    | rejected by trg_semester_immutable: semester 3: session and term cannot be changed
+ T87     | R2      | PASS    | rejected by chk_lecturers_email: new row for relation "lecturers" violates check constraint "chk_lecturers_email"
+ T88     | R21     | PASS    | rejected by trg_records_permanent: TRUNCATE on result_amendments is not allowed: academic records are permanent
+ T89     | R21     | PASS    | rejected by trg_records_permanent: TRUNCATE on result_amendments is not allowed: academic records are permanent
+
+
+=== Summary ===
+ passed | failed | total 
+--------+--------+-------
+    105 |      0 |   105
+
+RESULT: 105 PASS, 0 FAIL

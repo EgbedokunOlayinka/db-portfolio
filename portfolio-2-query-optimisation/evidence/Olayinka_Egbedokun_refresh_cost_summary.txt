@@ -1,0 +1,2 @@
+refresh_ms_with: 426.415 361.907 358.979  (median 361.907)
+refresh_ms_without: 342.391 336.708 341.447  (median 341.447)

@@ -1,0 +1,137 @@
+                                                  Access privileges
+ Schema |                Name                |   Type   |   Access privileges    |   Column privileges    | Policies 
+--------+------------------------------------+----------+------------------------+------------------------+----------
+ public | academic_sessions                  | table    | wavers=arwdDxtm/wavers+| name:                 +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | starts_on:            +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | ends_on:              +| 
+        |                                    |          |                        |   portal_app=a/wavers  | 
+ public | academic_sessions_session_id_seq   | sequence |                        |                        | 
+ public | course_offerings                   | table    | wavers=arwdDxtm/wavers+| course_id:            +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | semester_id:          +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | lecturer_id:          +| 
+        |                                    |          |                        |   portal_app=aw/wavers+| 
+        |                                    |          |                        | capacity:             +| 
+        |                                    |          |                        |   portal_app=aw/wavers | 
+ public | course_offerings_offering_id_seq   | sequence |                        |                        | 
+ public | course_prerequisites               | table    | wavers=arwdDxtm/wavers+| course_id:            +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | prerequisite_id:      +| 
+        |                                    |          |                        |   portal_app=a/wavers  | 
+ public | courses                            | table    | wavers=arwdDxtm/wavers+| department_id:        +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | code:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | title:                +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | units:                +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | level:                +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | term:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers  | 
+ public | courses_course_id_seq              | sequence |                        |                        | 
+ public | departments                        | table    | wavers=arwdDxtm/wavers+| faculty_id:           +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | code:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | name:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | head_lecturer_id:     +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | departments_department_id_seq      | sequence |                        |                        | 
+ public | effective_results                  | view     | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+ public | faculties                          | table    | wavers=arwdDxtm/wavers+| code:                 +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | name:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | dean_lecturer_id:     +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | faculties_faculty_id_seq           | sequence |                        |                        | 
+ public | grade_scale                        | table    | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+ public | graded_courses                     | view     | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+ public | lecturers                          | table    | wavers=arwdDxtm/wavers+| department_id:        +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | staff_no:             +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | first_name:           +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | last_name:            +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | email:                +| 
+        |                                    |          |                        |   portal_app=aw/wavers | 
+ public | lecturers_lecturer_id_seq          | sequence |                        |                        | 
+ public | programmes                         | table    | wavers=arwdDxtm/wavers+| department_id:        +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | code:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | name:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | award:                +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | duration_years:       +| 
+        |                                    |          |                        |   portal_app=a/wavers  | 
+ public | programmes_programme_id_seq        | sequence |                        |                        | 
+ public | registrations                      | table    | wavers=arwdDxtm/wavers+| student_id:           +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | offering_id:          +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | status:               +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | registrations_registration_id_seq  | sequence |                        |                        | 
+ public | result_amendments                  | table    | wavers=arwdDxtm/wavers+| result_id:            +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | new_score:            +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | reason:               +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | amended_by:           +| 
+        |                                    |          |                        |   portal_app=a/wavers  | 
+ public | result_amendments_amendment_id_seq | sequence |                        |                        | 
+ public | results                            | table    | wavers=arwdDxtm/wavers+| registration_id:      +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | score:                +| 
+        |                                    |          |                        |   portal_app=aw/wavers+| 
+        |                                    |          |                        | status:               +| 
+        |                                    |          |                        |   portal_app=w/wavers +| 
+        |                                    |          |                        | entered_by:           +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | approved_by:          +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | results_result_id_seq              | sequence |                        |                        | 
+ public | semester_gpa                       | view     | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+ public | semesters                          | table    | wavers=arwdDxtm/wavers+| session_id:           +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | term:                 +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | status:               +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | semesters_semester_id_seq          | sequence |                        |                        | 
+ public | student_cgpa                       | view     | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+ public | students                           | table    | wavers=arwdDxtm/wavers+| matric_no:            +| 
+        |                                    |          | portal_app=r/wavers    |   portal_app=a/wavers +| 
+        |                                    |          |                        | first_name:           +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | last_name:            +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | email:                +| 
+        |                                    |          |                        |   portal_app=aw/wavers+| 
+        |                                    |          |                        | programme_id:         +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | entry_session_id:     +| 
+        |                                    |          |                        |   portal_app=a/wavers +| 
+        |                                    |          |                        | status:               +| 
+        |                                    |          |                        |   portal_app=w/wavers  | 
+ public | students_student_id_seq            | sequence |                        |                        | 
+ public | transcript                         | view     | wavers=arwdDxtm/wavers+|                        | 
+        |                                    |          | portal_app=r/wavers    |                        | 
+(31 rows)
+

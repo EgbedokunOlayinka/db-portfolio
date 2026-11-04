@@ -1,0 +1,11 @@
+OK    portfolio-1-database-design/README.md: "14 tables, 5 views"
+OK    portfolio-1-database-design/Olayinka_Egbedokun_database_design.md: "has 14 tables and 5 views"
+OK    portfolio-1-database-design/Olayinka_Egbedokun_normalisation.md: "these are the schema's 14 tables"
+OK    portfolio-1-database-design/README.md: "78 of 78 columns and 21 of 21 foreign keys"
+OK    portfolio-1-database-design/README.md: "105 PASS, 0 FAIL"
+OK    portfolio-1-database-design/README.md: "all 14 triggers"
+OK    portfolio-1-database-design/README.md: "exactly its 8 tests fail"
+OK    portfolio-1-database-design/README.md: "Each of the 22 business rules (R1–R22"
+OK    the diagram shown in Olayinka_Egbedokun_er_diagram.md is identical to Olayinka_Egbedokun_er_diagram.mmd
+OK    the design document's rule-to-test table matches the test log (104 tests)
+OK    every one of the 67 constraints and trigger rules named in the rule table is expected by a test
