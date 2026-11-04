@@ -1,0 +1,4 @@
+Correction committed in PostgreSQL for WU/2024/2001, CSC211 (an amendment, as Portfolio 1 requires).
+CGPA in PostgreSQL before: 2.58; after: 2.42
+CGPA in the MongoDB copy right after the correction: 2.58 (stale)
+CGPA in the MongoDB copy after re-exporting that one student: 2.42

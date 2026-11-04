@@ -1,0 +1,4 @@
+M2 without indexes|docsExamined=4006|keysExamined=0|returned=10|plan=PROJECTION_SIMPLE <- SORT <- COLLSCAN
+M3 without indexes|docsExamined=4006|keysExamined=4006|returned=193|plan=PROJECTION_SIMPLE <- FETCH <- IXSCAN(_id_)
+M2 with indexes|docsExamined=0|keysExamined=10|returned=10|plan=LIMIT <- PROJECTION_COVERED <- IXSCAN(programme_cgpa)
+M3 with indexes|docsExamined=193|keysExamined=193|returned=193|plan=SORT <- PROJECTION_SIMPLE <- FETCH <- IXSCAN(course_grade)

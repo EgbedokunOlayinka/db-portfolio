@@ -1,12 +1,12 @@
 # Wavers University Student Result Portal — local database services
 #
-#   docker compose up -d --wait     start PostgreSQL and wait until it is healthy
+#   docker compose up -d --wait     start PostgreSQL and MongoDB and wait until both are healthy
 #   docker compose down             stop (data is kept in the named volume)
 #   docker compose down -v          stop and delete the data
 #
-# The image is pinned to an exact release so every run uses the same server.
-# The password is for this local, single-user setup only. No port is
-# published: every script reaches the server with `docker exec`.
+# Images are pinned to exact releases so every run uses the same servers.
+# The passwords are for this local, single-user setup only. No port is
+# published: every script reaches the servers with `docker exec`.
 name: wavers-portal
 
 services:
@@ -27,5 +27,20 @@ services:
       timeout: 3s
       retries: 30
 
+  mongo:
+    image: mongo:8.0.34
+    container_name: wu-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: wavers
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-wavers_local_only}
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
 volumes:
   pgdata:
+  mongodata:

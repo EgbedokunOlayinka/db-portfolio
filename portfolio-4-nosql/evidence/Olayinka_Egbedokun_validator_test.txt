@@ -1,0 +1,2 @@
+grade G, score 75.00: REJECTED: code 121 (Document failed validation)
+grade A, score 120.00: REJECTED: code 121 (Document failed validation)

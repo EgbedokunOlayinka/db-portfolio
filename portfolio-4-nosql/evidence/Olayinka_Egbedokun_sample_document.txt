@@ -1,0 +1,266 @@
+Students in PostgreSQL: 4006; documents in MongoDB: 4006
+Average document size: 3474 bytes
+
+One document (the student used in M1), as stored:
+{
+  _id: 'WU/2024/2001',
+  cgpa: Decimal128('2.58'),
+  name: {
+    last: 'S2001',
+    first: 'Student'
+  },
+  status: 'active',
+  programme: 'CSC-BSC',
+  semesters: [
+    {
+      gpa: Decimal128('2.67'),
+      term: 'first',
+      courses: [
+        {
+          code: 'CSC111',
+          grade: 'C',
+          score: Decimal128('56.60'),
+          title: 'Computer Science 111',
+          units: 3,
+          points: 3,
+          amended: false
+        },
+        {
+          code: 'CSC112',
+          grade: 'E',
+          score: Decimal128('41.62'),
+          title: 'Computer Science 112',
+          units: 3,
+          points: 1,
+          amended: false
+        },
+        {
+          code: 'CSC113',
+          grade: 'F',
+          score: Decimal128('35.14'),
+          title: 'Computer Science 113',
+          units: 3,
+          points: 0,
+          amended: false
+        },
+        {
+          code: 'CSC114',
+          grade: 'D',
+          score: Decimal128('48.52'),
+          title: 'Computer Science 114',
+          units: 3,
+          points: 2,
+          amended: false
+        },
+        {
+          code: 'CSC115',
+          grade: 'A',
+          score: Decimal128('89.67'),
+          title: 'Computer Science 115',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC116',
+          grade: 'A',
+          score: Decimal128('83.80'),
+          title: 'Computer Science 116',
+          units: 3,
+          points: 5,
+          amended: false
+        }
+      ],
+      session: '2024/2025',
+      unitsTaken: 18
+    },
+    {
+      gpa: Decimal128('3.33'),
+      term: 'second',
+      courses: [
+        {
+          code: 'CSC121',
+          grade: 'A',
+          score: Decimal128('94.05'),
+          title: 'Computer Science 121',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC122',
+          grade: 'A',
+          score: Decimal128('98.71'),
+          title: 'Computer Science 122',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC123',
+          grade: 'C',
+          score: Decimal128('57.75'),
+          title: 'Computer Science 123',
+          units: 3,
+          points: 3,
+          amended: false
+        },
+        {
+          code: 'CSC124',
+          grade: 'A',
+          score: Decimal128('98.00'),
+          title: 'Computer Science 124',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC125',
+          grade: 'D',
+          score: Decimal128('47.87'),
+          title: 'Computer Science 125',
+          units: 3,
+          points: 2,
+          amended: false
+        },
+        {
+          code: 'CSC126',
+          grade: 'F',
+          score: Decimal128('39.22'),
+          title: 'Computer Science 126',
+          units: 3,
+          points: 0,
+          amended: false
+        }
+      ],
+      session: '2024/2025',
+      unitsTaken: 18
+    },
+    {
+      gpa: Decimal128('2.67'),
+      term: 'first',
+      courses: [
+        {
+          code: 'CSC211',
+          grade: 'B',
+          score: Decimal128('68.28'),
+          title: 'Computer Science 211',
+          units: 3,
+          points: 4,
+          amended: false
+        },
+        {
+          code: 'CSC212',
+          grade: 'F',
+          score: Decimal128('34.53'),
+          title: 'Computer Science 212',
+          units: 3,
+          points: 0,
+          amended: false
+        },
+        {
+          code: 'CSC213',
+          grade: 'A',
+          score: Decimal128('94.00'),
+          title: 'Computer Science 213',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC214',
+          grade: 'E',
+          score: Decimal128('42.34'),
+          title: 'Computer Science 214',
+          units: 3,
+          points: 1,
+          amended: false
+        },
+        {
+          code: 'CSC215',
+          grade: 'A',
+          score: Decimal128('86.54'),
+          title: 'Computer Science 215',
+          units: 3,
+          points: 5,
+          amended: false
+        },
+        {
+          code: 'CSC216',
+          grade: 'E',
+          score: Decimal128('40.78'),
+          title: 'Computer Science 216',
+          units: 3,
+          points: 1,
+          amended: false
+        }
+      ],
+      session: '2025/2026',
+      unitsTaken: 18
+    },
+    {
+      gpa: Decimal128('1.67'),
+      term: 'second',
+      courses: [
+        {
+          code: 'CSC221',
+          grade: 'D',
+          score: Decimal128('49.63'),
+          title: 'Computer Science 221',
+          units: 3,
+          points: 2,
+          amended: false
+        },
+        {
+          code: 'CSC222',
+          grade: 'F',
+          score: Decimal128('37.10'),
+          title: 'Computer Science 222',
+          units: 3,
+          points: 0,
+          amended: false
+        },
+        {
+          code: 'CSC223',
+          grade: 'F',
+          score: Decimal128('38.16'),
+          title: 'Computer Science 223',
+          units: 3,
+          points: 0,
+          amended: false
+        },
+        {
+          code: 'CSC224',
+          grade: 'B',
+          score: Decimal128('62.24'),
+          title: 'Computer Science 224',
+          units: 3,
+          points: 4,
+          amended: false
+        },
+        {
+          code: 'CSC225',
+          grade: 'E',
+          score: Decimal128('41.03'),
+          title: 'Computer Science 225',
+          units: 3,
+          points: 1,
+          amended: false
+        },
+        {
+          code: 'CSC226',
+          grade: 'C',
+          score: Decimal128('58.85'),
+          title: 'Computer Science 226',
+          units: 3,
+          points: 3,
+          amended: false
+        }
+      ],
+      session: '2025/2026',
+      unitsTaken: 18
+    }
+  ],
+  unitsTaken: 72,
+  unitsPassed: 57
+}

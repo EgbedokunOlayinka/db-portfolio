@@ -1,0 +1,2 @@
+2026-11-04T20:48:42.692+0000	connected to: mongodb://localhost/
+2026-11-04T20:48:43.431+0000	4006 document(s) imported successfully. 0 document(s) failed to import.

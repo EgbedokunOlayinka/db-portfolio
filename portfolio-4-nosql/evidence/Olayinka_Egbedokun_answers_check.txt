@@ -1,0 +1,6 @@
+M1 transcript: 24 rows in each
+M2 dean's list: 10 rows in each
+M3 failed CSC211: 193 rows in each
+M4 totals: 4006 rows in each
+M4 stored cgpa: 4006 rows in each
+MongoDB and PostgreSQL answers: IDENTICAL
