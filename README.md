@@ -37,12 +37,13 @@ semester GPA and cumulative GPA (CGPA), and generate a transcript.
 | [Portfolio 2](portfolio-2-query-optimisation/README.md) | Query processing and optimisation | Complete |
 | [Portfolio 3](portfolio-3-transactions-concurrency/README.md) | Transactions and concurrency | Complete |
 | [Portfolio 4](portfolio-4-nosql/README.md) | NoSQL and advanced data models | Complete |
-| Portfolio 5 | Distributed and cloud database | Not started |
+| [Portfolio 5](portfolio-5-distributed-cloud/README.md) | Distributed and cloud database | Complete |
 
 ## Stack and how to run
 
 All databases run in Docker, from [compose.yml](compose.yml), pinned to
-exact versions: PostgreSQL 18.6 and MongoDB 8.0.34.
+exact versions: PostgreSQL 18.6 and MongoDB 8.0.34. Portfolio 5 runs its
+own primary and replica from [its own compose file](portfolio-5-distributed-cloud/compose.yml).
 
 ```bash
 docker compose up -d --wait      # start the database and wait until it is ready
@@ -61,9 +62,7 @@ and where the evidence is.
 ├── portfolio-2-query-optimisation/       # P2: queries, plans, indexing, analysis, evidence/
 ├── portfolio-3-transactions-concurrency/ # P3: commit, rollback, isolation, lost update, evidence/
 ├── portfolio-4-nosql/                    # P4: MongoDB document model, queries, indexes, evidence/
+├── portfolio-5-distributed-cloud/        # P5: primary and replica, consistency, failover, evidence/
 ├── compose.yml                           # database services (Docker)
 └── README.md
 ```
-
-The folder for portfolio 5 (`portfolio-5-distributed-cloud/`) is added
-when it starts.

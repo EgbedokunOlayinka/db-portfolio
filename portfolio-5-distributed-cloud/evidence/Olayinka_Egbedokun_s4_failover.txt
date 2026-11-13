@@ -1,0 +1,16 @@
+=== Data on the primary: 5 corrections; 141 rows in all tables; md5 9ea2e77d830b9506e6d9e2694727f8e2
+=== The replica goes offline
+=== On the primary, with the replica offline (asynchronous replication, so the commit does not wait)
+correction to 45.00 committed (synchronous_commit = on); the commit returned after 0.0 s
+Data on the primary: 6 corrections; 142 rows in all tables; md5 65475efb188eacf135c1518ecdf4a42c
+=== The primary crashes (killed)
+=== The replica comes back; the primary is unreachable
+replica in recovery (standby): t
+=== Promote the replica
+pg_promote() returned true; in recovery: f
+Data on the new primary: 5 corrections; 141 rows in all tables; md5 9ea2e77d830b9506e6d9e2694727f8e2
+Zainab's CGPA on the new primary: 1.79
+(identical to the data before the replica went offline: the correction committed while it was offline is lost)
+=== The new primary accepts writes
+correction to 80.00 committed (synchronous_commit = on); the commit returned after 0.0 s
+Zainab's CGPA on the new primary: 2.11

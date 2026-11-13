@@ -1,0 +1,19 @@
+=== Replication status, read on the primary
+ application_name |   state   | sync_state 
+------------------+-----------+------------
+ replica1         | streaming | async
+(1 row)
+
+=== The replica was cloned before any data existed; the schema and seed loaded afterwards on the primary reached it
+primary: 1 corrections; 137 rows in all tables; md5 88b2b02c17f357def4ab942e6ee0af1f
+replica: 1 corrections; 137 rows in all tables; md5 88b2b02c17f357def4ab942e6ee0af1f
+
+Zainab's CGPA on the replica: 1.32
+=== On the primary
+correction to 74.00 committed (synchronous_commit = on); the commit returned after 0.0 s
+=== On the replica, polled every 0.1 s until the correction was applied
+Zainab's CGPA on the replica: 2.11 (primary: 2.11)
+time since the applied correction committed on the primary: 349 ms (an upper bound on the replication delay)
+
+=== The same correction sent to the replica
+ERROR:  cannot execute INSERT in a read-only transaction

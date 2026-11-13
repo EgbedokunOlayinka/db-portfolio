@@ -1,0 +1,33 @@
+=== synchronous_standby_names = 'replica1'; replication status, read on the primary
+ application_name |   state   | sync_state 
+------------------+-----------+------------
+ replica1         | streaming | sync
+(1 row)
+
+=== The replica's replay is paused. Zainab's CGPA: 1.79
+=== The head commits a correction with synchronous_commit = remote_apply (in the background)
+=== Two seconds later, on the primary: the head's session is still waiting
+ application_name | wait_event_type | wait_event |             query              
+------------------+-----------------+------------+--------------------------------
+ p5_writer        | IPC             | SyncRep    | INSERT INTO result_amendments 
+(1 row)
+
+Zainab's CGPA read by another session on the primary: 1.79
+Zainab's CGPA on the replica: 1.79
+=== Three seconds after the commit was sent, replay resumed
+correction to 66.00 committed (synchronous_commit = remote_apply); the commit returned after 3.3 s
+Zainab's CGPA on the primary: 1.95
+Zainab's CGPA on the replica, read straight after the commit returned (no waiting): 1.95
+
+=== Scenario 3b: the synchronous replica goes offline (as in a network partition)
+=== Two seconds later, on the primary: the commit is waiting for a replica that is not there
+ application_name | wait_event_type | wait_event |             query              
+------------------+-----------------+------------+--------------------------------
+ p5_writer        | IPC             | SyncRep    | INSERT INTO result_amendments 
+(1 row)
+
+Zainab's CGPA read by another session on the primary: 1.95
+=== The replica comes back
+correction to 58.00 committed (synchronous_commit = remote_apply); the commit returned after 2.3 s
+Zainab's CGPA on the primary: 1.79; on the replica: 1.79
+=== synchronous_standby_names reset; the replica is asynchronous again

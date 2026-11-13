@@ -1,0 +1,14 @@
+=== The replica's replay is paused (it still receives WAL, but does not apply it)
+Zainab's CGPA on the replica: 2.11
+=== On the primary
+correction to 52.00 committed (synchronous_commit = on); the commit returned after 0.0 s
+=== Replication status, read on the primary: the correction has reached the replica's disk, not its data
+ application_name | received_up_to | applied_up_to | bytes_not_applied 
+------------------+----------------+---------------+-------------------
+ replica1         | 0/3172190      | 0/3171FF0     |               416
+(1 row)
+
+Zainab's CGPA on the primary: 1.79
+Zainab's CGPA on the replica: 2.11 (stale)
+=== Replay resumed
+Zainab's CGPA on the replica: 1.79 (caught up)
