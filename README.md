@@ -45,14 +45,19 @@ All databases run in Docker, from [compose.yml](compose.yml), pinned to
 exact versions: PostgreSQL 18.6 and MongoDB 8.0.34. Portfolio 5 runs its
 own primary and replica from [its own compose file](portfolio-5-distributed-cloud/compose.yml).
 
+Requirements: Docker (with Docker Compose) and bash. From the repository
+root:
+
 ```bash
-docker compose up -d --wait      # start the database and wait until it is ready
+docker compose up -d --wait      # start PostgreSQL and MongoDB and wait until both are ready
+bash portfolio-1-database-design/Olayinka_Egbedokun_reproduce.sh   # likewise for portfolios 2-5
 ```
 
 Each portfolio has one reproduce script that rebuilds its database from
 empty and regenerates every file in its `evidence/` folder, stopping with
-an error if any check fails. Each portfolio README lists what is checked
-and where the evidence is.
+an error if any check fails. The scripts start the containers they need
+themselves. Each portfolio README lists what is checked and where the
+evidence is.
 
 ## Repository structure
 
